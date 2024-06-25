@@ -86,17 +86,11 @@ class HourlyDetails extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Container(
-          child: Text(getTime(timeStamp),style:const TextStyle(color: Colors.lightBlueAccent, fontWeight:FontWeight.bold)),
-        ),
-        Container(
-          child: Image.asset("assets/weather/$weatherIcon.png",
-            height:40,
-            width: 40,),
-        ),
-        Container(
-          child: Text("$temp°",style:const TextStyle(color: Colors.lightBlueAccent,fontWeight: FontWeight.bold)),
-        ),
+        Text(getTime(timeStamp),style:const TextStyle(color: Colors.lightBlueAccent, fontWeight:FontWeight.bold)),
+        Image.asset("assets/weather/$weatherIcon.png",
+          height:40,
+          width: 40,),
+        Text("$temp°",style:const TextStyle(color: Colors.lightBlueAccent,fontWeight: FontWeight.bold)),
       ],
     );
   }

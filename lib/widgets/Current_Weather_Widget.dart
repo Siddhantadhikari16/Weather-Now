@@ -14,7 +14,7 @@ class CurrentWeatherWidget extends StatefulWidget {
 }
 
 class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
-  final _textController = TextEditingController();
+  // final _textController = TextEditingController();
 
   String city = '';
   void getData()async{
@@ -45,7 +45,7 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
       children: [
         temperatureAreaWidget(),
         currentWeatherInDetail(),
-        searchBar()
+        // searchBar()
       ],
     );
   }
@@ -179,61 +179,61 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
     );
   }
 
-  Widget searchBar() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 20,),
-              child: Container(
-                  height: 40,
-                  width: 340,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: Colors.black)),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context,"/homeScreen",arguments:{"searchText": _textController });
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Icon(Icons.search, color: Colors.blue.shade800),
-                        ),
-                      ),
-                      // Expanded(
-                      //   child:
-                      //       // TextField(
-                      //       //   controller: _textController,
-                      //       //   decoration:  InputDecoration(
-                      //       //       border: InputBorder.none,
-                      //       //       contentPadding: const EdgeInsets.all(12),
-                      //       //       suffixIcon: IconButton(onPressed:(){
-                      //       //         _textController.clear();
-                      //       //       }, icon: const Icon(Icons.clear_rounded)),
-                      //       //       hintText: "Enter Location"),
-                      //       // ),
-                      //   ),
-                    ],
-                  )
-                  //
-                  ),
-            ),
-          ],
-        ),
-        ElevatedButton(
-            onPressed:(){setState(() {
-              getData();
-              city = _textController.text;
-            });
-             },
-            child: const Text("Search")
-        )],
-    );
-  }
+  // Widget searchBar() {
+  //   return Column(
+  //     children: [
+  //       Row(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Padding(
+  //             padding: const EdgeInsets.only(top: 20,),
+  //             child: Container(
+  //                 height: 40,
+  //                 width: 340,
+  //                 decoration: BoxDecoration(
+  //                     borderRadius: BorderRadius.circular(20),
+  //                     border: Border.all(color: Colors.black)),
+  //                 // child: Row(
+  //                 //   children: [
+  //                 //     GestureDetector(
+  //                 //       onTap: () {
+  //                 //         Navigator.pushNamed(context,"/homeScreen",arguments:{"searchText": _textController });
+  //                 //       },
+  //                 //       child: Padding(
+  //                 //         padding: const EdgeInsets.all(8.0),
+  //                 //         child: Icon(Icons.search, color: Colors.blue.shade800),
+  //                 //       ),
+  //                 //     ),
+  //                 //     // Expanded(
+  //                 //     //   child:
+  //                 //     //       // TextField(
+  //                 //     //       //   controller: _textController,
+  //                 //     //       //   decoration:  InputDecoration(
+  //                 //     //       //       border: InputBorder.none,
+  //                 //     //       //       contentPadding: const EdgeInsets.all(12),
+  //                 //     //       //       suffixIcon: IconButton(onPressed:(){
+  //                 //     //       //         _textController.clear();
+  //                 //     //       //       }, icon: const Icon(Icons.clear_rounded)),
+  //                 //     //       //       hintText: "Enter Location"),
+  //                 //     //       // ),
+  //                 //     //   ),
+  //                 //   ],
+  //                 // )
+  //                 //
+  //                 ),
+  //           ),
+  //         ],
+  //       ),
+  //       ElevatedButton(
+  //           onPressed:(){setState(() {
+  //             getData();
+  //             city = _textController.text;
+  //           });
+  //            },
+  //           child: const Text("Search")
+  //       )],
+  //   );
+  // }
   void fetch(){
 print(city);
   }
