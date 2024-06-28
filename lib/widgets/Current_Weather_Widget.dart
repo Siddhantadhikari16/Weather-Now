@@ -46,21 +46,18 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
           ];
         });
       } else {
-        // Handle error: City not found
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('City Not Found'),
-              content: const Text('Please enter a valid city name.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text('OK'),
-                ),
-              ],
-            );
-          },
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content:
+                Text('Please Enter A Valid City Name.'),
+            backgroundColor: Colors.redAccent,
+            duration: Duration(seconds: 2),
+            // action: SnackBarAction(
+            //   label: 'Ok',
+            //   onPressed: () =>
+            //       ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+            // ),
+          ),
         );
         setState(() {
           cityFound = false; // Reset cityFound flag on error
@@ -107,7 +104,10 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
               ),
               Row(
                 children: [
-                  const Icon(Icons.location_searching_outlined,color: Colors.amberAccent,),
+                  const Icon(
+                    Icons.location_searching_outlined,
+                    color: Colors.amberAccent,
+                  ),
                   cityFound
                       ? Text(' $city',
                           style: const TextStyle(
@@ -131,8 +131,11 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
         Expanded(
           child: Container(
             width: 225,
-            decoration: BoxDecoration(
-                color: Colors.black, borderRadius: BorderRadius.circular(15)),
+            decoration: const BoxDecoration(
+                color: Colors.black,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15))),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RichText(

@@ -45,8 +45,8 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
         Text(
           city,
           style: const TextStyle(
-            color: Colors.blue,
-            fontSize: 20,
+            color: Colors.redAccent,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
             height: 2,
           ),
