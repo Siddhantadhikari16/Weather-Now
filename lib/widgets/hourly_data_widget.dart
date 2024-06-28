@@ -104,16 +104,10 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
   }
 }
 
-class HourlyDetails extends StatelessWidget {
+class HourlyDetails extends StatefulWidget {
   int temp;
   int timeStamp;
   String weatherIcon;
-
-  String getTime(final timeStamp) {
-    DateTime time = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
-    String x = DateFormat('jm').format(time);
-    return x;
-  }
 
   HourlyDetails(
       {Key? key,
@@ -122,19 +116,30 @@ class HourlyDetails extends StatelessWidget {
       required this.weatherIcon});
 
   @override
+  State<HourlyDetails> createState() => _HourlyDetailsState();
+}
+
+class _HourlyDetailsState extends State<HourlyDetails> {
+  String getTime(final timeStamp) {
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+    String x = DateFormat('jm').format(time);
+    return x;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text(getTime(timeStamp),
+        Text(getTime(widget.timeStamp),
             style: const TextStyle(
                 color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)),
         Image.asset(
-          "assets/weather/$weatherIcon.png",
+          "assets/weather/${widget.weatherIcon}.png",
           height: 40,
           width: 40,
         ),
-        Text("$temp°",
+        Text("${widget.temp}°",
             style: const TextStyle(
                 color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)),
       ],
