@@ -35,7 +35,20 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 20, top: 20),
+          child: Row(
+            children: [
+              Icon(Icons.pin_drop_rounded,color: Colors.red,),
+              Text(
+                "Current Location",
+                style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
+              ),
+            ],
+          ),
+        ),
         Container(
             margin: const EdgeInsets.only(
               left: 20,
@@ -45,7 +58,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             child: Text(
               city,
               style: const TextStyle(
-                fontSize: 45,
+                color: Colors.white,
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
                 height: 2,
               ),
@@ -56,7 +70,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             child: Text(
               date,
               style: const TextStyle(
-                color: Colors.grey,
+                color: Colors.white,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 height: 2,

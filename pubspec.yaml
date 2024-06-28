@@ -38,7 +38,7 @@ dependencies:
   http: ^0.13.5
   sleek_circular_slider: ^2.0.1
   intl: ^0.19.0
-  flutter_google_places_hoc081098: ^1.2.0
+  shared_preferences: ^2.2.3
   
 
 dev_dependencies:

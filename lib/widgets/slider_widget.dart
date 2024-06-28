@@ -14,7 +14,7 @@ class ComfortLevel extends StatelessWidget {
       child: Container(
         height: 250,
         width: 50,
-        decoration: const BoxDecoration(color: Colors.blue,borderRadius: BorderRadius.all(Radius.circular(20))),
+        decoration: const BoxDecoration(color: Color.fromRGBO(11, 163, 255, 3),borderRadius: BorderRadius.all(Radius.circular(20))),
         child: Column(
           children: [
             const Padding(
@@ -59,17 +59,17 @@ class ComfortLevel extends StatelessWidget {
                       Container(
                         height: 45,
                         width: 1,
-                        color: Colors.grey,
+                        color: Colors.white,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left:30),
                         child: RichText(
                             text: TextSpan(children: [
-                                const TextSpan(
-                                text: "UV Index: ",style: TextStyle(fontSize: 15,color: Colors.black,fontWeight: FontWeight.bold)),
-                            TextSpan(
-                                text: "${weatherDataCurrent.current.uvIndex}",style: const TextStyle(fontSize: 15,color: Colors.white,fontWeight: FontWeight.bold)
-                            )])),
+                              const TextSpan(
+                                  text: "UV Index: ",style: TextStyle(fontSize: 15,color: Colors.black,fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: "${weatherDataCurrent.current.uvi}",style: const TextStyle(fontSize: 15,color: Colors.white, fontWeight: FontWeight.bold)
+                              )])),
                       )]  ,
                   )
                 ],

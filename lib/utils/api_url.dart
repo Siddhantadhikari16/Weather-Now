@@ -1,4 +1,3 @@
-import 'package:weather_now/api/api_key.dart';
 
 String apiURL(var lat, var lon) {
   String url;

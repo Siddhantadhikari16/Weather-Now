@@ -3,18 +3,54 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_now/controller/global_controller.dart';
 import 'package:weather_now/model/weather_data_hourly.dart';
+import 'package:geocoding/geocoding.dart';
 
-class HourlyDataWidget extends StatelessWidget {
+
+class HourlyDataWidget extends StatefulWidget {
   final WeatherDataHourly weatherDataHourly;
   HourlyDataWidget({Key? key, required this.weatherDataHourly})
       : super(key:key);
 
+  @override
+  State<HourlyDataWidget> createState() => _HourlyDataWidgetState();
+}
+
+class _HourlyDataWidgetState extends State<HourlyDataWidget> {
+  String city = "";
+
   RxInt cardIndex = GlobalController().getIndex();
+
+  final GlobalController globalController =
+  Get.put(GlobalController(), permanent: true);
+
+  @override
+  void initState() {
+    getAddress(globalController.getLatitude().value,
+        globalController.getLongitude().value);
+    super.initState();
+  }
+
+  getAddress(lat, lon) async {
+    List<Placemark> placemark = await placemarkFromCoordinates(lat, lon);
+    Placemark place = placemark[0];
+    setState(() {
+      city = place.locality!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return  Column(
       children: [
+        Text(
+          city,
+          style: const TextStyle(
+            color: Colors.blue,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            height: 2,
+          ),
+        ),
         Container(
           margin: const EdgeInsets.symmetric(),
           alignment: Alignment.topCenter,
@@ -33,8 +69,8 @@ class HourlyDataWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10,bottom: 10),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: weatherDataHourly.hourly.length>12?
-        20:weatherDataHourly.hourly.length,
+        itemCount: widget.weatherDataHourly.hourly.length>12?
+        20:widget.weatherDataHourly.hourly.length,
         itemBuilder: (context,index){
           return Obx(() => GestureDetector(
             onTap: (){
@@ -54,9 +90,9 @@ class HourlyDataWidget extends StatelessWidget {
                Colors.black,
              ]):null),
                 child: HourlyDetails(
-                  temp: weatherDataHourly.hourly[index].temp!,
-                  timeStamp: weatherDataHourly.hourly[index].dt!,
-                  weatherIcon: weatherDataHourly.hourly[index].weather![0].icon!,
+                  temp: widget.weatherDataHourly.hourly[index].temp!,
+                  timeStamp: widget.weatherDataHourly.hourly[index].dt!,
+                  weatherIcon: widget.weatherDataHourly.hourly[index].weather![0].icon!,
                 ),
               )));
         },

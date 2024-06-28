@@ -6,9 +6,7 @@ import 'package:weather_now/widgets/Daily_Data_Widget.dart';
 import 'package:weather_now/widgets/header_widget.dart';
 import 'package:weather_now/widgets/hourly_data_widget.dart';
 import 'package:weather_now/widgets/slider_widget.dart';
-import '../Themes/theme_manager.dart';
 
-ThemeManager _themeManager = ThemeManager();
 
 
 class HomeScreen extends StatefulWidget {
@@ -25,18 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Get.theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.white60,
-        actions: [
-          Switch(
-            value: _themeManager.themeMode == ThemeMode.dark,
-            onChanged: (newValue) {
-              _themeManager.toggleTheme(newValue);
-            },
-          )
-        ],
-      ),
+      backgroundColor: const Color.fromRGBO(254, 255, 255, 1),
       body: SafeArea(
         child: Obx(() => globalController.checkLoading().isTrue
             ? Center(
@@ -49,12 +36,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   scrollDirection: Axis.vertical,
                   children: [
                     const SizedBox(),
-                    const HeaderWidget(),
-                    CurrentWeatherWidget(
-                        weatherDataCurrent: globalController
-                            .getWeatherData()
-                            .getCurrentWeather()),
-            
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Container(
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(20)),
+                          // only(bottomLeft: Radius.circular(40),bottomRight: Radius.circular(30))                      ,
+                          color: Color.fromRGBO(11, 163, 255, 3)
+                        ),
+                        child: Column(
+                          children: [
+                            const HeaderWidget(),
+                        CurrentWeatherWidget(
+                            weatherDataCurrent: globalController
+                                .getWeatherData()
+                                .getCurrentWeather()),
+                          ],
+                        ),
+                      ),
+                    ),
                     HourlyDataWidget(
                         weatherDataHourly: globalController
                             .getWeatherData()
