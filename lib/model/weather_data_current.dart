@@ -40,8 +40,8 @@ class Current {
   Map<String, dynamic> toJson() => {
         'temp': temp,
         'humidity': humidity,
-        'feelsLike':feelsLike,
-        'uvi':uvi,
+        'feelsLike': feelsLike,
+        'uvi': uvi,
         'clouds': clouds,
         'weather': weather?.map((e) => e.toJson()).toList(),
       };

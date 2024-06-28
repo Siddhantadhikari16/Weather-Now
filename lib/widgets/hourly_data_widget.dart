@@ -5,11 +5,10 @@ import 'package:weather_now/controller/global_controller.dart';
 import 'package:weather_now/model/weather_data_hourly.dart';
 import 'package:geocoding/geocoding.dart';
 
-
 class HourlyDataWidget extends StatefulWidget {
   final WeatherDataHourly weatherDataHourly;
-  HourlyDataWidget({Key? key, required this.weatherDataHourly})
-      : super(key:key);
+  const HourlyDataWidget({Key? key, required this.weatherDataHourly})
+      : super(key: key);
 
   @override
   State<HourlyDataWidget> createState() => _HourlyDataWidgetState();
@@ -21,7 +20,7 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
   RxInt cardIndex = GlobalController().getIndex();
 
   final GlobalController globalController =
-  Get.put(GlobalController(), permanent: true);
+      Get.put(GlobalController(), permanent: true);
 
   @override
   void initState() {
@@ -40,7 +39,7 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         Text(
           city,
@@ -56,43 +55,47 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
           alignment: Alignment.topCenter,
           padding: const EdgeInsets.only(top: 10),
           child: const Text("TODAY",
-              style: TextStyle(fontWeight:FontWeight.w700,fontSize: 18)),
+              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18)),
         ),
         hourlyList()
       ],
     );
   }
 
-  Widget hourlyList(){
+  Widget hourlyList() {
     return Container(
       height: 160,
-      padding: const EdgeInsets.only(top: 10,bottom: 10),
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: widget.weatherDataHourly.hourly.length>12?
-        20:widget.weatherDataHourly.hourly.length,
-        itemBuilder: (context,index){
+        itemCount: widget.weatherDataHourly.hourly.length > 12
+            ? 20
+            : widget.weatherDataHourly.hourly.length,
+        itemBuilder: (context, index) {
           return Obx(() => GestureDetector(
-            onTap: (){
-              cardIndex.value=index;
-            },
+              onTap: () {
+                cardIndex.value = index;
+              },
               child: Container(
                 width: 80,
-              margin: const EdgeInsets.only(left: 20,right: 5),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(10),
-                 gradient: cardIndex.value == index
-                     ? const LinearGradient(
-                     begin:Alignment.topLeft,
-                     end: Alignment.bottomRight,colors:[
-               Colors.black,
-               Colors.black,
-             ]):null),
+                margin: const EdgeInsets.only(left: 20, right: 5),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: cardIndex.value == index
+                        ? const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                                Colors.black,
+                                Colors.black,
+                              ])
+                        : null),
                 child: HourlyDetails(
                   temp: widget.weatherDataHourly.hourly[index].temp!,
                   timeStamp: widget.weatherDataHourly.hourly[index].dt!,
-                  weatherIcon: widget.weatherDataHourly.hourly[index].weather![0].icon!,
+                  weatherIcon:
+                      widget.weatherDataHourly.hourly[index].weather![0].icon!,
                 ),
               )));
         },
@@ -101,32 +104,39 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
   }
 }
 
-
-
-
-
 class HourlyDetails extends StatelessWidget {
- int temp;
- int timeStamp;
- String weatherIcon;
- 
- String getTime(final timeStamp){
-   DateTime time = DateTime.fromMillisecondsSinceEpoch(timeStamp*1000);
-   String x = DateFormat('jm').format(time);
-   return x;
- }
- HourlyDetails({Key?key, required this.timeStamp, required this.temp, required this.weatherIcon});
+  int temp;
+  int timeStamp;
+  String weatherIcon;
+
+  String getTime(final timeStamp) {
+    DateTime time = DateTime.fromMillisecondsSinceEpoch(timeStamp * 1000);
+    String x = DateFormat('jm').format(time);
+    return x;
+  }
+
+  HourlyDetails(
+      {Key? key,
+      required this.timeStamp,
+      required this.temp,
+      required this.weatherIcon});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Text(getTime(timeStamp),style:const TextStyle(color: Colors.lightBlueAccent, fontWeight:FontWeight.bold)),
-        Image.asset("assets/weather/$weatherIcon.png",
-          height:40,
-          width: 40,),
-        Text("$temp°",style:const TextStyle(color: Colors.lightBlueAccent,fontWeight: FontWeight.bold)),
+        Text(getTime(timeStamp),
+            style: const TextStyle(
+                color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)),
+        Image.asset(
+          "assets/weather/$weatherIcon.png",
+          height: 40,
+          width: 40,
+        ),
+        Text("$temp°",
+            style: const TextStyle(
+                color: Colors.lightBlueAccent, fontWeight: FontWeight.bold)),
       ],
     );
   }

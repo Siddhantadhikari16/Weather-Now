@@ -1,4 +1,3 @@
-
 String apiURL(var lat, var lon) {
   String url;
   url =

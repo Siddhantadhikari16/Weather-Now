@@ -19,7 +19,6 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
   bool cityFound = false;
 
   void getData() async {
-    // Replace 'YOUR_API_KEY' with your actual OpenWeatherMap API key
     final uri = Uri.parse(
         "https://api.openweathermap.org/data/2.5/weather?q=$city&appid=179e2260f583c2831cecf60ceb1caadd");
     try {
@@ -48,8 +47,7 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-            content:
-                Text('Please Enter A Valid City Name.'),
+            content: Text('Please Enter A Valid City Name.'),
             backgroundColor: Colors.redAccent,
             duration: Duration(seconds: 2),
             // action: SnackBarAction(
@@ -60,7 +58,7 @@ class _CurrentWeatherWidgetState extends State<CurrentWeatherWidget> {
           ),
         );
         setState(() {
-          cityFound = false; // Reset cityFound flag on error
+          cityFound = false;
         });
       }
     } catch (error) {

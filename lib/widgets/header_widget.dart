@@ -17,6 +17,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
 
   final GlobalController globalController =
       Get.put(GlobalController(), permanent: true);
+
   @override
   void initState() {
     getAddress(globalController.getLatitude().value,
@@ -41,10 +42,14 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           padding: EdgeInsets.only(left: 20, top: 20),
           child: Row(
             children: [
-              Icon(Icons.pin_drop_rounded,color: Colors.red,),
+              Icon(
+                Icons.pin_drop_rounded,
+                color: Colors.red,
+              ),
               Text(
                 "Current Location",
-                style: TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
+                style:
+                    TextStyle(fontStyle: FontStyle.italic, color: Colors.white),
               ),
             ],
           ),
